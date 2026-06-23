@@ -16,4 +16,11 @@ public class Bank {
         }
         return account;
     }
+
+    public void transfer(String fromId, String toId, long amount) {
+        Account fromAccount = getAccount(fromId);
+        Account toAccount = getAccount(toId);
+        fromAccount.withdraw(amount);
+        toAccount.deposit(amount);
+    }
 }

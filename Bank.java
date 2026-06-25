@@ -12,7 +12,7 @@ public class Bank {
     public Account getAccount(String id) {
         Account account = accounts.get(id);
         if (account == null) {
-            throw new IllegalArgumentException("계좌를 찾을 수 없습니다");
+            throw new AccountNotFoundException("계좌를 찾을 수 없습니다");
         }
         return account;
     }

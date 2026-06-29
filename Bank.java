@@ -2,10 +2,13 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Bank {
     private Map<String, Account> accounts = new HashMap<>();
     private List<Transaction> history = new ArrayList<>();
+    private final Set<String> usedKeys = new HashSet<>();
 
     public void createAccount(String id, String owner, long initialBalance) {
         Account account = new Account(id, owner, initialBalance);
@@ -36,11 +39,15 @@ public class Bank {
         history.add(new Transaction(TransactionType.WITHDRAW, id, null, amount));
     }
 
-    public void transfer(String fromId, String toId, long amount) {
+    public void transfer(String fromId, String toId, long amount, String idempotencyKey) {
+        if (usedKeys.contains(idempotencyKey)) {
+            return;
+        }
         Account fromAccount = getAccount(fromId);
         Account toAccount = getAccount(toId);
         fromAccount.withdraw(amount);
         toAccount.deposit(amount);
         history.add(new Transaction(TransactionType.TRANSFER, fromId, toId, amount));
+        usedKeys.add(idempotencyKey);
     }
 }

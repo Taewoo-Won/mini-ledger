@@ -26,5 +26,9 @@ public class Main {
         for (Transaction t : bank.getHistory()) {
             System.out.println(t.getType() + " " + t.getFrom() + " -> " + t.getTo() + " : " + t.getAmount());
         }
+        System.out.println("===== a 계좌 거래만 =====");
+        for (Transaction t : bank.getHistoryByAccount("a")) {
+            System.out.println(t.getType() + " " + t.getFrom() + " -> " + t.getTo() + " : " + t.getAmount());
+        }
     }
 }

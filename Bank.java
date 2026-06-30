@@ -27,6 +27,16 @@ public class Bank {
         return history;
     }
 
+    public List<Transaction> getHistoryByAccount(String id) {
+        List<Transaction> result = new ArrayList<>();
+        for (Transaction t : history) {
+            if (id.equals(t.getFrom()) || id.equals(t.getTo())) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     public void deposit(String id, long amount) {
         Account toAccount = getAccount(id);
         toAccount.deposit(amount);

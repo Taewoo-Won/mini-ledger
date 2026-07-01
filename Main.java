@@ -30,5 +30,9 @@ public class Main {
         for (Transaction t : bank.getHistoryByAccount("a")) {
             System.out.println(t.getType() + " " + t.getFrom() + " -> " + t.getTo() + " : " + t.getAmount());
         }
+        System.out.println("===== 1000원 이상 거래 =====");
+        for (Transaction t : bank.getHistoryAbove(1000)) {
+            System.out.println(t.getType() + " " + t.getFrom() + " -> " + t.getTo() + " : " + t.getAmount());
+        }
     }
 }

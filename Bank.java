@@ -37,6 +37,16 @@ public class Bank {
         return result;
     }
 
+    public List<Transaction> getHistoryAbove(long minAmount) {
+        List<Transaction> result = new ArrayList<>();
+        for (Transaction t : history) {
+            if (t.getAmount() >= minAmount) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     public void deposit(String id, long amount) {
         Account toAccount = getAccount(id);
         toAccount.deposit(amount);
